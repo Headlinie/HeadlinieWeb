@@ -1,5 +1,8 @@
-bower_components
-server/cache
+bower_components/
+server/cache/
 npm-debug.log
-server/vendor
+server/vendor/
 server/composer.lock
+node_modules/
+src/app.js
+build/
