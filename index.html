@@ -33,6 +33,10 @@
     //jq '.data.children[].data | {title: .title, domain: .domain, link: .url, category: .link_flair_text}' -- worldnews.json
 
     var serverUrl = "server/";
+    var redditUrl = "http://www.reddit.com/r/worldnews.json";
+    if(location.href.indexOf('local') !== -1) {
+      redditUrl = serverUrl + 'worldnews.json';
+    }
 
     var PostInfo = React.createClass({
       render: function() {
@@ -163,8 +167,7 @@
         }
     });
 
-    $.getJSON('http://www.reddit.com/r/worldnews.json', function(data) {
-    //$.getJSON(serverUrl + 'worldnews.json', function(data) {
+    $.getJSON(redditUrl, function(data) {
         var allPosts = [];
         var posts = data.data.children
         posts.forEach(function(post) {
