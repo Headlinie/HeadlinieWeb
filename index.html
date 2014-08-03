@@ -163,8 +163,8 @@
         }
     });
 
-    // $.getJSON('http://www.reddit.com/r/worldnews.json', function(data) {
-    $.getJSON(serverUrl + 'worldnews.json', function(data) {
+    $.getJSON('http://www.reddit.com/r/worldnews.json', function(data) {
+    //$.getJSON(serverUrl + 'worldnews.json', function(data) {
         var allPosts = [];
         var posts = data.data.children
         posts.forEach(function(post) {
