@@ -2,7 +2,8 @@
 
 class Utils {
 	public static function replace_images($input) {
-		$replacement = " [ReplacedImage] ";
+		// $replacement = " [ReplacedImage] ";
+		$replacement = ' <span class=\"btn-lg glyphicon glyphicon-picture\"></span> ';
 		$pattern = "(<img.*>[A-Za-z0-9_.]+</img>|<img[^>]+\>)";
 		// $pattern = "(<.*img.*>[a-zA-Z]</.*img.*>|<.*img.*/>)";
 		$output = preg_replace($pattern, $replacement, $input);
