@@ -151,6 +151,10 @@ var AllPosts = React.createClass({
     getInitialState: function() {
       return {posts: this.props.data}
     },
+    reloadSource: function() {
+      document.getElementById('mountArea').innerHTML = "<h1>Loading...</h1>";
+      loadPage();
+    },
     render: function() {
       var posts = this.state.posts.map(function(data, i) {
         return (
@@ -165,6 +169,14 @@ var AllPosts = React.createClass({
             <span className="glyphicon glyphicon-globe"></span>
             &nbsp;
             WorldNews
+            &nbsp;
+            <span className="pull-right">
+              <a href="#" className="btn btn-primary" onClick={this.reloadSource}>
+                <span className="glyphicon glyphicon-refresh"></span>
+                &nbsp;
+                Reload main-source
+              </a>
+            </span>
           </h1>
           {posts}
         </div>
@@ -172,19 +184,22 @@ var AllPosts = React.createClass({
     }
 });
 
-getJSON(redditUrl, function(data) {
-    var allPosts = [];
-    var posts = data.data.children
-    posts.forEach(function(post) {
-        var d = post.data;
-        var story = {
-          title: d.title,
-          domain: d.domain,
-          comments: 'http://www.reddit.com' + d.permalink,
-          link: d.url,
-          category: d.link_flair_text
-        };
-        allPosts.push(story);
-    })
-    React.renderComponent(<AllPosts data={allPosts}/>, document.getElementById('mountArea'));
-});
+function loadPage() {
+  getJSON(redditUrl, function(data) {
+      var allPosts = [];
+      var posts = data.data.children
+      posts.forEach(function(post) {
+          var d = post.data;
+          var story = {
+            title: d.title,
+            domain: d.domain,
+            comments: 'http://www.reddit.com' + d.permalink,
+            link: d.url,
+            category: d.link_flair_text
+          };
+          allPosts.push(story);
+      })
+      React.renderComponent(<AllPosts data={allPosts}/>, document.getElementById('mountArea'));
+  });
+}
+loadPage();
