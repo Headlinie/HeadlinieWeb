@@ -75,7 +75,7 @@ $url = $url . "&token=8680f644ff6278a311ff8c0a4713223b20a24f48";
 
 try {
 	$output = get_content($cacheName, $url, 24);
-	// $output = Utils::replace_images($output);
+	$output = Utils::replace_images($output);
 	if(!$output) {
 		$output = '{"messages": "Something went wrong... ID: '.$cacheName.'"}';
 	}
