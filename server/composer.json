@@ -1,0 +1,13 @@
+{
+    "name": "victorbjelkholm/worldnews_server",
+    "require": {
+        "guzzle/guzzle": "3.9.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Victor",
+            "email": "victorbjelkholm@gmail.com"
+        }
+    ]
+}
