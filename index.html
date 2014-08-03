@@ -172,11 +172,12 @@
         var posts = data.data.children
         posts.forEach(function(post) {
             var d = post.data;
-            var story = {};
-            story.title = d.title;
-            story.domain = d.domain;
-            story.link = d.url;
-            story.category = d.link_flair_text;
+            var story = {
+              title: d.title,
+              domain: d.domain,
+              link: d.url,
+              category: d.link_flair_text
+            };
             allPosts.push(story);
         })
         React.renderComponent(<AllPosts data={allPosts}/>, document.getElementById('mountArea'));
