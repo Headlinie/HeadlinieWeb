@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.html",
   "dependencies": {
-    "gulp": "~3.6.2",
-    "gulp-concat": "~2.2.0",
-    "gulp-uglify": "~0.3.0"
+    "gulp-uglify": "^0.3.1",
+    "gulp-concat": "^2.3.4",
+    "gulp": "^3.8.7"
   },
   "author": "Victor Bjelkholm <victorbjelkholm@gmail.com>",
   "license": "MIT"
