@@ -1,7 +1,4 @@
 /** @jsx React.DOM */
-console.clear();
-//jq '.data.children[].data | {title: .title, domain: .domain, link: .url, category: .link_flair_text}' -- worldnews.json
-
 var getJSON = function(url, callback) {
   xhr = new XMLHttpRequest;
   xhr.onreadystatechange = function() {

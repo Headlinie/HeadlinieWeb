@@ -1,0 +1,14 @@
+{
+  "name": "WorldNews",
+  "description": "The whole worlds news, in your hand",
+  "launch_path": "/index.html",
+  "icons": {
+    "128": "/imgs/icon-128.png"
+  },
+  "developer": {
+    "name": "Victor Bjelkholm",
+    "url": "http://victor.bjelkholm.com"
+  },
+  "appcache_path": "/main_cache.appcache",
+  "default_locale": "en"
+}
