@@ -129,6 +129,8 @@
               <div className={this.state.loading ? 'well' : 'post'}>
                 <div className={this.state.open ? '' : 'hidden'}>
                   <a className="btn btn-warning" onClick={this.forceReload} target="_blank">Force-Reload</a>
+                  &nbsp;
+                  <a className="btn btn-default" href={post.comments} target="_blank">Comments</a>
                 </div>
                 <div className={this.state.error ? 'alert alert-danger' : 'hidden'}>
                   <h1>Error!</h1>
@@ -175,6 +177,7 @@
             var story = {
               title: d.title,
               domain: d.domain,
+              comments: 'http://www.reddit.com' + d.permalink,
               link: d.url,
               category: d.link_flair_text
             };
