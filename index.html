@@ -118,19 +118,37 @@
                   </a>
                 </span>
                 &nbsp;
-                <a className="btn btn-info" href={post.link} target="_blank">Source</a>
+                <a className="btn btn-info" href={post.link} target="_blank">
+                  <span className="glyphicon glyphicon-link"></span>
+                  &nbsp;
+                  Source
+                </a>
                 &nbsp;
-                <span className="label label-primary">{post.domain}</span>
+                <span className="label label-primary">
+                  <span className="glyphicon glyphicon-globe"></span>
+                  &nbsp;
+                  {post.domain}
+                </span>
                 &nbsp;
-                <span className="badge">
+                <span className={post.category ? "badge" : "hidden"}>
+                  <span className="glyphicon glyphicon-tag"></span>
+                  &nbsp;
                   {post.category}
                 </span>
               </p>
               <div className={this.state.loading ? 'well' : 'post'}>
                 <div className={this.state.open ? '' : 'hidden'}>
-                  <a className="btn btn-warning" onClick={this.forceReload} target="_blank">Force-Reload</a>
+                  <a className="btn btn-warning" onClick={this.forceReload} target="_blank">
+                    <span className="glyphicon glyphicon-refresh"></span>
+                    &nbsp;
+                    Force-Reload
+                  </a>
                   &nbsp;
-                  <a className="btn btn-default" href={post.comments} target="_blank">Comments</a>
+                  <a className="btn btn-default" href={post.comments} target="_blank">
+                    <span className="glyphicon glyphicon-comment"></span>
+                    &nbsp;
+                    Comments
+                  </a>
                 </div>
                 <div className={this.state.error ? 'alert alert-danger' : 'hidden'}>
                   <h1>Error!</h1>
@@ -162,7 +180,11 @@
           });
           return (
             <div>
-              <h1>WorldNews</h1>
+              <h1>
+                <span className="glyphicon glyphicon-globe"></span>
+                &nbsp;
+                WorldNews
+              </h1>
               {posts}
             </div>
           );
