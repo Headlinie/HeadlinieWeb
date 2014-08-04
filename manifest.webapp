@@ -3,8 +3,8 @@
   "description": "The whole worlds news, in your hand",
   "launch_path": "/index.html",
   "icons": {
-    "60": "imgs/icon-60.png",
-    "128": "imgs/icon-128.png"
+    "60": "http://victor.bjelkholm.com/worldnews/imgs/icon-60.png",
+    "128": "http://victor.bjelkholm.com/worldnews/imgs/icon-128.png"
   },
   "developer": {
     "name": "Victor Bjelkholm",
