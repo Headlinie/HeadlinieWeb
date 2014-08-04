@@ -10,6 +10,6 @@
     "name": "Victor Bjelkholm",
     "url": "http://victor.bjelkholm.com"
   },
-  "appcache_path": "http://victor.bjelkholm.com/worldnews/main_cache.appcache",
+  "appcache_path": "/worldnews/main_cache.appcache",
   "default_locale": "en"
 }
