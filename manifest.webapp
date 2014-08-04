@@ -1,7 +1,7 @@
 {
   "name": "WorldNews",
   "description": "The whole worlds news, in your hand",
-  "launch_path": "/index.html",
+  "launch_path": "/worldnews/index.html",
   "icons": {
     "60": "http://victor.bjelkholm.com/worldnews/imgs/icon-60.png",
     "128": "http://victor.bjelkholm.com/worldnews/imgs/icon-128.png"
