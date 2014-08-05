@@ -1,7 +1,7 @@
 {
   "name": "WorldNews",
   "description": "The whole worlds news, in your hand",
-  "launch_path": "/worldhomes/index.html",
+  "launch_path": "/worldnews/index.html",
   "icons": {
     "60": "http://victor.bjelkholm.com/worldnews/imgs/icon-v2-60.png",
     "128": "http://victor.bjelkholm.com/worldnews/imgs/icon-v2-128.png"
@@ -10,6 +10,6 @@
     "name": "Victor Bjelkholm",
     "url": "http://victor.bjelkholm.com"
   },
-  "appcache_path": "/worldhomes/main_cache.appcache",
+  "appcache_path": "/worldnews/main_cache.appcache",
   "default_locale": "en"
 }
