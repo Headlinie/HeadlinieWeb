@@ -102,17 +102,32 @@ var Post = React.createClass({
               Source
             </a>
             &nbsp;
-            <span className="label label-primary">
-              <span className="glyphicon glyphicon-globe"></span>
+            <span className="hidden-xs">
+              <span className="label label-primary">
+                <span className="glyphicon glyphicon-globe"></span>
+                &nbsp;
+                {post.domain}
+              </span>
               &nbsp;
-              {post.domain}
+              <span className={post.category ? "badge" : "hidden"}>
+                <span className="glyphicon glyphicon-tag"></span>
+                &nbsp;
+                {post.category}
+              </span>
             </span>
-            &nbsp;
-            <span className={post.category ? "badge" : "hidden"}>
-              <span className="glyphicon glyphicon-tag"></span>
+            <div className="visible-xs-block meta-small">
+              <span className="label label-primary">
+                <span className="glyphicon glyphicon-globe"></span>
+                &nbsp;
+                {post.domain}
+              </span>
               &nbsp;
-              {post.category}
-            </span>
+              <span className={post.category ? "badge" : "hidden"}>
+                <span className="glyphicon glyphicon-tag"></span>
+                &nbsp;
+                {post.category}
+              </span>
+            </div>
           </p>
           <div className={this.state.loading ? 'well' : 'post'}>
             <div className={this.state.open ? '' : 'hidden'}>
@@ -170,8 +185,10 @@ var AllPosts = React.createClass({
             <span className="pull-right">
               <a href="#" className="btn btn-primary" onClick={this.reloadSource}>
                 <span className="glyphicon glyphicon-refresh"></span>
-                &nbsp;
-                Reload main-source
+                <span className="hidden-xs">
+                  &nbsp;
+                  Reload main-source
+                </span>
               </a>
             </span>
           </h1>
