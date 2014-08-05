@@ -87,6 +87,13 @@ var Post = React.createClass({
     }.bind(this));
     return false;
   },
+  toggleArticle: function() {
+    if(!this.state.open) {
+      this.readArticle();
+    } else {
+      this.closeArticle();
+    }
+  },
   readArticle: function() {
     var post = this.props.data;
     mixpanel.track("Reading article", {
@@ -113,7 +120,7 @@ var Post = React.createClass({
       return (
         <div>
           <p>
-            <h5>{post.title}</h5>
+            <h5 onClick={ this.toggleArticle }>{post.title}</h5>
             <span className={this.state.open ? 'hidden' : ''}>
               <a className="btn btn-primary" href="" onClick={this.readArticle}>
                 <span className="glyphicon glyphicon-chevron-down"></span>
