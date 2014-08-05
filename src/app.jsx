@@ -16,6 +16,30 @@ if(location.href.indexOf('local') !== -1) {
   redditUrl = serverUrl + 'worldnews.json';
 }
 
+var GoToTopButton = React.createClass({
+  render: function() {
+    var styleObj = {
+      position: 'fixed',
+      bottom: 5,
+      right: 5
+    };
+    return (
+      <div style={styleObj}>
+        <a href="#" className="btn btn-default visible-xs-block">
+          <span className="glyphicon glyphicon-arrow-up"></span>
+          &nbsp;
+          Top
+        </a>
+        <a href="#" className="btn btn-default hidden-xs">
+          <span className="glyphicon glyphicon-arrow-up"></span>
+          &nbsp;
+          Go to top
+        </a>
+      </div>
+    )
+  }
+});
+
 var PostInfo = React.createClass({
   render: function() {
     // return ()
@@ -193,6 +217,7 @@ var AllPosts = React.createClass({
             </span>
           </h1>
           {posts}
+          <GoToTopButton/>
         </div>
       );
     }
