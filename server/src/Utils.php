@@ -12,6 +12,10 @@ class Utils {
 	}
 	public static function get_domain($url) {
 		$parsed_url = parse_url($url);
-		return $parsed_url['host'];
+		$domain = $parsed_url['host'];
+		if(substr($domain, 0, 4) === "www.") {
+			$domain = substr($domain, 4, strlen($domain) - 4);
+		}
+		return $domain;
 	}
 }
