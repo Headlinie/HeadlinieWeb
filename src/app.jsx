@@ -56,6 +56,9 @@ var Post = React.createClass({
     };
   },
   closeArticle: function() {
+    mixpanel.track("Closing article", {
+      'link': this.props.data.link
+    });
     this.setState({loading: false, open: false, error: false, content: null});
     return false;
   },
@@ -70,6 +73,9 @@ var Post = React.createClass({
   },
   forceReload: function() {
     var post = this.props.data;
+    mixpanel.track("Force reloading article", {
+      'link': post.link
+    });
     this.setState({loading: true, content: "Loading..."});
     this.getArticle(post.link, true, function(data) {
       // this.setState({open: true});
@@ -83,6 +89,9 @@ var Post = React.createClass({
   },
   readArticle: function() {
     var post = this.props.data;
+    mixpanel.track("Reading article", {
+      'link': post.link
+    });
     this.setState({loading: true, content: "Loading...", open: true});
     this.getArticle(post.link, false, function(data) {
       // this.setState({open: true});
@@ -188,6 +197,7 @@ var AllPosts = React.createClass({
       return {posts: this.props.data}
     },
     reloadSource: function() {
+      mixpanel.track("Reloading source");
       document.getElementById('mountArea').innerHTML = "<h1>Loading...</h1>";
       loadPage();
     },
@@ -224,6 +234,7 @@ var AllPosts = React.createClass({
 });
 
 function loadPage() {
+  mixpanel.track("Loading initial source");
   getJSON(redditUrl, function(data) {
       var allPosts = [];
       var posts = data.data.children
