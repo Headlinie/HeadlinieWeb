@@ -1,8 +1,8 @@
 ﻿CACHE MANIFEST
-# v1 - 1.0.1 - 2013-08-05 - 12:55
-bower_components/bootstrap/dist/css/bootstrap.min.css
+# v1 - 1.0.1 - 2013-08-05 - 12:58
+css/superhero.bootstrap.min.css
 build/app.min.js
-bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff
+fonts/glyphicons-halflings-regular.woff
 imgs/icon-60.png
 imgs/icon-128.png
 
