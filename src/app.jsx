@@ -16,10 +16,18 @@ if(location.href.indexOf('local') !== -1) {
   redditUrl = serverUrl + 'worldnews.json';
 }
 
-var lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
-if(lockOrientation) {
-  lockOrientation('portrait');
+function lockToPortait(){
+  try {
+    var lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
+    if(lockOrientation) {
+      lockOrientation('portrait');
+    }
+  } catch (e) {
+    console.error('Couldnt lock to portrait');
+    /* handle error */
+  }
 }
+lockToPortait();
 
 var GoToTopButton = React.createClass({
   render: function() {
