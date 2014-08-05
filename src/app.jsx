@@ -16,6 +16,11 @@ if(location.href.indexOf('local') !== -1) {
   redditUrl = serverUrl + 'worldnews.json';
 }
 
+var lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
+if(lockOrientation) {
+  lockOrientation('portrait');
+}
+
 var GoToTopButton = React.createClass({
   render: function() {
     var styleObj = {
