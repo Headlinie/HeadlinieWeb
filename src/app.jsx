@@ -12,8 +12,25 @@ var getJSON = function(url, callback) {
 
 var serverUrl = "server/";
 var redditUrl = "http://www.reddit.com/r/worldnews.json";
+var Track = null;
 if(location.href.indexOf('local') !== -1) {
   redditUrl = serverUrl + 'worldnews.json';
+  Track = function() {
+    console.log(arguments);
+  }
+} else {
+  Track = function(name, object) {
+    if(object !== undefined) {
+      mixpanel.track(name, object);
+    } else {
+      mixpanel.track(name);
+    }
+  }
+}
+
+var possibleToInstallWebapp = false;
+if(window.navigator.mozApps !== undefined) {
+  possibleToInstallWebapp = true;
 }
 
 function lockToPortait(){
@@ -21,13 +38,71 @@ function lockToPortait(){
     var lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
     if(lockOrientation) {
       lockOrientation('portrait');
+      Track("Locked to portrait");
     }
   } catch (e) {
-    console.error('Couldnt lock to portrait');
-    /* handle error */
+    //console.error('Couldnt lock to portrait');
   }
 }
 lockToPortait();
+
+var manifestUrl = 'http://victor.bjelkholm.com/worldnews/manifest.webapp';
+
+var InstallAppButton = React.createClass({
+  handleInstallApp: function() {
+    Track("Installing App");
+    var request = window.navigator.mozApps.install(manifestUrl);
+    request.onsuccess = function () {
+      Track("App installed!")
+    };
+    request.onerror = function () {
+      alert("Something went wrong. Please report this issue");
+      Track("App not installed!", {message: this.error.name});
+    };
+  },
+  componentDidMount: function() {
+    if(possibleToInstallWebapp) {
+      Track("Device supports installation");
+      var request = window.navigator.mozApps.checkInstalled(manifestUrl);
+      request.onsuccess = function(event) {
+        if (!request.result) {
+          setTimeout(function() {
+            this.setState({visible: true});
+            Track("Show installation button");
+          }.bind(this), 10000);
+        } else {
+          Track("App already installed");
+        }
+      }.bind(this);
+    }
+  },
+  getInitialState: function() {
+    return {
+      visible: false
+    }
+  },
+  render: function() {
+    var styleObj = {
+      position: 'fixed',
+      bottom: 15,
+      left: 5
+    };
+    return (
+      <div style={styleObj} className={this.state.visible ? '' : 'hidden'}>
+        <a href="#" className="btn-info btn-lg hidden-xs" onClick={this.handleInstallApp}>
+          <span className="glyphicon glyphicon-download-alt"></span>
+          &nbsp;
+          Install locally
+        </a>
+        <a href="#" className="btn-info btn-lg visible-xs-block" onClick={this.handleInstallApp}>
+          <span className="glyphicon glyphicon-download-alt"></span>
+          &nbsp;
+          Install
+        </a>
+      </div>  
+    )
+  }
+})
 
 var GoToTopButton = React.createClass({
   render: function() {
@@ -69,8 +144,9 @@ var Post = React.createClass({
     };
   },
   closeArticle: function() {
-    mixpanel.track("Closing article", {
-      'link': this.props.data.link
+    Track("Closing article", {
+      'link': this.props.data.link,
+      'Title': this.props.data.title
     });
     this.setState({loading: false, open: false, error: false, content: null});
     return false;
@@ -86,8 +162,9 @@ var Post = React.createClass({
   },
   forceReload: function() {
     var post = this.props.data;
-    mixpanel.track("Force reloading article", {
-      'link': post.link
+    Track("Force reloading article", {
+      'link': post.link,
+      'Title': post.title
     });
     this.setState({loading: true, content: "Loading..."});
     this.getArticle(post.link, true, function(data) {
@@ -109,8 +186,9 @@ var Post = React.createClass({
   },
   readArticle: function() {
     var post = this.props.data;
-    mixpanel.track("Reading article", {
-      'link': post.link
+    Track("Reading article", {
+      'link': post.link,
+      'Title': post.title
     });
     this.setState({loading: true, content: "Loading...", open: true});
     this.getArticle(post.link, false, function(data) {
@@ -217,7 +295,7 @@ var AllPosts = React.createClass({
       return {posts: this.props.data}
     },
     reloadSource: function() {
-      mixpanel.track("Reloading source");
+      Track("Reloading source");
       document.getElementById('mountArea').innerHTML = "<h1>Loading...</h1>";
       loadPage();
     },
@@ -248,13 +326,14 @@ var AllPosts = React.createClass({
           </h1>
           {posts}
           <GoToTopButton/>
+          <InstallAppButton/>
         </div>
       );
     }
 });
 
 function loadPage() {
-  mixpanel.track("Loading initial source");
+  Track("Loading initial source");
   getJSON(redditUrl, function(data) {
       var allPosts = [];
       var posts = data.data.children
