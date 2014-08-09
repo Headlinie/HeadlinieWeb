@@ -1,5 +1,8 @@
 <?php
-require_once('src/Utils.php');
+
+namespace WorldNewsTest;
+
+use WorldNews\Utils;
 
 class ReplaceImagesTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,5 +1,7 @@
 <?php
 
+namespace WorldNews;
+
 class Utils {
 	public static function replace_images($input) {
 		// $replacement = " [ReplacedImage] ";
