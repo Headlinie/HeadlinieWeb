@@ -6,3 +6,6 @@ server/composer.lock
 node_modules/
 src/app.js
 build/
+server/coverage/
+server/tests/data/cacheFolder
+.DS_Store
