@@ -19,7 +19,7 @@ class SourceTest extends BaseTest
 		$sources = BaseSource::getAllSources();
 		$output = $sources->toJson();
 
-		$expected_output = '[{"name":"reddit","url":"http:\/\/www.reddit.com\/","endpoint":"http:\/\/www.reddit.com\/r\/worldnews.json","category":""}]';
+		$expected_output = '[{"name":"reddit","url":"http:\/\/www.reddit.com","endpoint":"http:\/\/www.reddit.com\/r\/worldnews.json","category":""}]';
 
 		$this->assertEquals($expected_output, $output);
 

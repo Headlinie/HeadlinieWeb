@@ -14,6 +14,20 @@
       margin-bottom: 10px;
     }
 
+    .post-content a:after {
+      font-family: 'Glyphicons Halflings';
+      content: "\2009\e144"
+    }
+
+    .post-content a {
+      color: #FFA742;
+      font-weight: bolder;
+    }
+
+    .post-content a:hover {
+      text-decoration: underline;
+    }
+
     .meta-small {
       margin-top: 10px;
     }
@@ -24,15 +38,73 @@
 
     h5 {
       font-size: 21px !important;
-      padding-bottom: 3px;
+      text-shadow: 2px 2px 1px #1A2630;
     }
 
     h5:hover {
       color: #FFF;
       cursor: pointer;
-      border-bottom: solid #FFF 1px;
-      padding-bottom: 2px;
     }
+
+    h2 {
+     text-shadow: 2px 2px 1px #1A2630;
+    }
+
+    .well {
+      background-color: #2b3e50;
+      box-shadow: 1px 1px 2px 1px #1A2630;
+    }
+
+    body {
+      background-color: #223140;
+    }
+
+    .popup-hide {
+      opacity: 0;
+      font-size: 150%;
+      transition: opacity .3s ease-in-out;
+      position: fixed;
+      left: 1px;
+      right: 100%;
+      top: 1px;
+      bottom: 100%;
+    }
+
+    .popup-show {
+      font-size: 150%;
+      background-color: rgba(0,0,0,0.6);
+      opacity: 1;
+      position: fixed;
+      left: 0px;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+      transition: opacity .4s ease-in-out;
+    }
+
+    .popup-body {
+      background-color: rgba(0,0,0,0.8);
+      padding: 1em;
+      position: fixed;
+      left: 30%;
+      right: 30%;
+      top: 20%;
+    }
+
+    .popup-hide .popup-body {
+      display: none;
+    }
+
+    .popup-close {
+      float: right;
+      color: #999;
+    }
+
+    .popup-close:hover {
+      cursor: pointer;
+      color: #FFF;
+    }
+
   </style>
   <script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
 for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);

@@ -50,5 +50,6 @@ class CacheTest extends BaseTest {
 		$cache->save("sitename/cachename", "somerandomcontent");
 		$content = $cache->retrieve("sitename/cachename");
 		$this->assertEquals("somerandomcontent", $content);
+
 	}
 }

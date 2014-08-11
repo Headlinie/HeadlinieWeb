@@ -24,6 +24,10 @@ class Cache {
 		return $content;
 	}
 
+	public function exists($name) {
+		return file_exists($this->cacheFolder . "/" . $name);
+	}
+
 	private function containsFolderInName($name)
 	{
 		if(explode('/', $name)[0] !== $name) {
