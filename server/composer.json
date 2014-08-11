@@ -1,7 +1,11 @@
 {
     "name": "victorbjelkholm/worldnews_server",
     "require": {
-        "guzzle/guzzle": "3.9.1"
+        "phpunit/phpunit": "@stable",
+        "d11wtq/boris": "@stable",
+        "iakio/gntp-notify": "@stable",
+        "klein/klein": "@stable",
+        "guzzlehttp/guzzle": "@stable"
     },
     "license": "MIT",
     "authors": [
@@ -9,5 +13,8 @@
             "name": "Victor",
             "email": "victorbjelkholm@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {"WorldNews\\": "src/"}
+    }
 }

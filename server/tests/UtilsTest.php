@@ -1,5 +1,8 @@
 <?php
-require_once('src/Utils.php');
+
+namespace WorldNewsTest;
+
+use WorldNews\Utils;
 
 class ReplaceImagesTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,6 +35,21 @@ class ReplaceImagesTest extends \PHPUnit_Framework_TestCase
         ];
         foreach ($testCases as $input => $expected_output) {
             $real_output = Utils::get_domain($input);
+            $this->assertEquals($expected_output, $real_output);
+        }
+    }
+
+    public function testMakeAllLinkTargetsBlank()
+    {
+        $testCases = [
+            '<a href="#">Something</a>' => '<a href="#" target="_blank">Something</a>',
+            '<a href="#" target>Link</a> Something' => '<a href="#" target="_blank">Link</a> Something',
+            '<a href="#" target="something">Link</a> Something' => '<a href="#" target="_blank">Link</a> Something',
+            'Something <a href="#" target="something">Link</a> Something' => 'Something <a href="#" target="_blank">Link</a> Something'
+        ];
+
+        foreach ($testCases as $input => $expected_output) {
+            $real_output = Utils::make_links_external($input);
             $this->assertEquals($expected_output, $real_output);
         }
     }

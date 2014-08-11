@@ -13,8 +13,7 @@ var getJSON = function(url, callback) {
 var serverUrl = "server/";
 var redditUrl = "http://www.reddit.com/r/worldnews.json";
 var Track = null;
-if(location.href.indexOf('local') !== -1) {
-  redditUrl = serverUrl + 'worldnews.json';
+if(location.href.indexOf('debug') !== -1) {
   Track = function() {
     console.log(arguments);
   }
@@ -26,6 +25,10 @@ if(location.href.indexOf('local') !== -1) {
       mixpanel.track(name);
     }
   }
+}
+
+if(location.href.indexOf('local') !== -1) {
+  redditUrl = serverUrl + 'worldnews.json';
 }
 
 var possibleToInstallWebapp = false;
@@ -59,6 +62,7 @@ var InstallAppButton = React.createClass({
       alert("Something went wrong. Please report this issue");
       Track("App not installed!", {message: this.error.name});
     };
+    return false;
   },
   componentDidMount: function() {
     if(possibleToInstallWebapp) {
@@ -99,7 +103,7 @@ var InstallAppButton = React.createClass({
           &nbsp;
           Install
         </a>
-      </div>  
+      </div>
     )
   }
 })
@@ -152,7 +156,7 @@ var Post = React.createClass({
     return false;
   },
   getArticle: function(articleLink, forceReload, callback) {
-    var articleLink = serverUrl + "?url=" + articleLink;
+    var articleLink = serverUrl + "sources/reddit/articles/" + encodeURIComponent(articleLink);
     if(forceReload) {
       articleLink = articleLink + "&force-reload=true";
     }
@@ -278,7 +282,7 @@ var Post = React.createClass({
               <h1>Error!</h1>
               { this.state.content }
             </div>
-            <div className={this.state.error ? 'hidden' : ''}>
+            <div className={this.state.error ? 'hidden' : 'post-content'}>
               <span className={this.state.open ? '' : 'hidden'}>
                 <h2>{post.title}</h2>
                 <div dangerouslySetInnerHTML={{__html: this.state.content}} />
@@ -290,6 +294,57 @@ var Post = React.createClass({
   }
 });
 
+//Ugly hack, fix this
+var cb;
+
+var Modal = React.createClass({
+  getInitialState: function() {
+    return {
+      visible: false
+    }
+  },
+  showPopup: function() {
+    this.setState({visible: true});
+  },
+  hidePopup: function() {
+    this.setState({visible: false});
+  },
+  componentDidMount: function() {
+    cb = function() {
+      this.showPopup();
+    }.bind(this);
+  },
+  render: function() {
+    return (
+      <div className={this.state.visible ? 'popup-show' : 'popup-hide'}>
+        <div className="popup-body">
+          <div className="popup-close" onClick={this.hidePopup}>
+            <span className="glyphicon glyphicon-remove"></span>
+          </div>
+          <h2>
+            <span className="glyphicon glyphicon-info-sign"></span>
+            &nbsp;
+            About
+          </h2>
+          <p>
+            WorldNews is a collection of news from all around the world.
+          </p>
+          <p>
+            The source is <a href="http://www.reddit.com/r/worldnews" target="_blank">r/worldnews</a> on reddit.
+          </p>
+          <p>
+            It was created by <a href="http://victor.bjelkholm.com/?source=worldnews" target="_blank">Victor Bjelkholm</a> and the source will be available on Github as OSS as soon as possible.
+          </p>
+          <p>
+            If you like the application, please rate it on <a href="https://marketplace.firefox.com/app/worldnews/" target="_blank">Firefox Marketplace</a>, spread
+            it or just keep using it like before.
+          </p>
+        </div>
+      </div>
+    )
+  }
+})
+
 var AllPosts = React.createClass({
     getInitialState: function() {
       return {posts: this.props.data}
@@ -298,6 +353,9 @@ var AllPosts = React.createClass({
       Track("Reloading source");
       document.getElementById('mountArea').innerHTML = "<h1>Loading...</h1>";
       loadPage();
+    },
+    showAbout: function() {
+      cb();
     },
     render: function() {
       var posts = this.state.posts.map(function(data, i) {
@@ -315,7 +373,15 @@ var AllPosts = React.createClass({
             WorldNews
             &nbsp;
             <span className="pull-right">
-              <a href="#" className="btn btn-primary" onClick={this.reloadSource}>
+              <a href="#" className="btn btn-primary" onClick={this.showAbout}>
+                <span className="glyphicon glyphicon-info-sign"></span>
+                <span className="hidden-xs">
+                  &nbsp;
+                  About
+                </span>
+              </a>
+              &nbsp;
+              <a href="#" className="btn btn-default" onClick={this.reloadSource}>
                 <span className="glyphicon glyphicon-refresh"></span>
                 <span className="hidden-xs">
                   &nbsp;
@@ -327,6 +393,7 @@ var AllPosts = React.createClass({
           {posts}
           <GoToTopButton/>
           <InstallAppButton/>
+          <Modal/>
         </div>
       );
     }
@@ -334,21 +401,15 @@ var AllPosts = React.createClass({
 
 function loadPage() {
   Track("Loading initial source");
-  getJSON(redditUrl, function(data) {
+  getJSON(serverUrl + "sources/reddit/articles", function(data) {
       var allPosts = [];
-      var posts = data.data.children
+      console.log(data);
+      var posts = data.articles;
       posts.forEach(function(post) {
-          var d = post.data;
-          var story = {
-            title: d.title,
-            domain: d.domain,
-            comments: 'http://www.reddit.com' + d.permalink,
-            link: d.url,
-            category: d.link_flair_text
-          };
-          allPosts.push(story);
+          allPosts.push(post);
       })
       React.renderComponent(<AllPosts data={allPosts}/>, document.getElementById('mountArea'));
   });
 }
 loadPage();
+
