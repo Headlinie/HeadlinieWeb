@@ -1,24 +1,32 @@
 var gulp = require('gulp');
+var browserify = require('browserify');
+var del = require('del');
+var reactify = require('reactify');
+var source = require('vinyl-source-stream');
 
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
+var paths = {
+  // TODO migrate CSS to LESS
+  //css: ['src/css/**/*.less'],
+  app_js: ['./src/js/app.jsx'],
+  js: ['src/js/*.js'],
+};
 
-gulp.task('default', function() {
-  throw new Error("There is no default task. Run ```make build``` to build latest")
+gulp.task('clean', function(done) {
+  del(['build'], done);
 });
 
-var bowerPath = "bower_components/";
 
-var applicationFiles = [
-	bowerPath + "react/react.min.js",
-	"src/app.js"
-];
-
-gulp.task('scripts-min', function() {
-  return gulp.src(applicationFiles)
-    .pipe(uglify())
-    .pipe(concat('app.min.js'))
-    .pipe(gulp.dest('build/'));
+gulp.task('js', ['clean'], function() {
+  browserify(paths.app_js)
+    .transform(reactify)
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest('./src/'));
 });
 
-gulp.task('build', ['scripts-min']);
+gulp.task('watch', function() {
+  gulp.watch(paths.app_js, ['js']);
+  gulp.watch(paths.js, ['js']);
+});
+
+gulp.task('default', ['watch', 'js']);
