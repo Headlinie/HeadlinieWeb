@@ -9,3 +9,4 @@ build/
 server/coverage/
 server/tests/data/cacheFolder
 .DS_Store
+src/bundle.js
