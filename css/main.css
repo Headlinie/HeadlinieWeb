@@ -1,0 +1,99 @@
+body {
+	padding-bottom: 70px !important;
+}
+
+.postItem {
+	border-bottom: 1px solid #428BCA;
+	margin-bottom: 10px;
+}
+
+.post-content a:after {
+	font-family: 'Glyphicons Halflings';
+	content: "\2009\e144"
+}
+
+.post-content a {
+	color: #FFA742;
+	font-weight: bolder;
+}
+
+.post-content a:hover {
+	text-decoration: underline;
+}
+
+.meta-small {
+	margin-top: 10px;
+}
+
+.btn {
+	padding: 4px 7px !important;
+}
+
+h5 {
+	font-size: 21px !important;
+	text-shadow: 2px 2px 1px #1A2630;
+}
+
+h5:hover {
+	color: #FFF;
+	cursor: pointer;
+}
+
+h2 {
+	text-shadow: 2px 2px 1px #1A2630;
+}
+
+.well {
+	background-color: #2b3e50;
+	box-shadow: 1px 1px 2px 1px #1A2630;
+}
+
+body {
+	background-color: #223140;
+}
+
+.popup-hide {
+	opacity: 0;
+	font-size: 150%;
+	transition: opacity .3s ease-in-out;
+	position: fixed;
+	left: 1px;
+	right: 100%;
+	top: 1px;
+	bottom: 100%;
+}
+
+.popup-show {
+	font-size: 120%;
+	background-color: rgba(0,0,0,0.6);
+	opacity: 1;
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	transition: opacity .4s ease-in-out;
+}
+
+.popup-body {
+	background-color: rgba(0,0,0,0.8);
+	padding: 1em;
+	position: fixed;
+	width: 90%;
+	margin-left: 3%;
+	top: 3%;
+}
+
+.popup-hide .popup-body {
+	display: none;
+}
+
+.popup-close {
+	float: right;
+	color: #999;
+}
+
+.popup-close:hover {
+	cursor: pointer;
+	color: #FFF;
+}
