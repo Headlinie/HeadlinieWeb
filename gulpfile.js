@@ -21,7 +21,7 @@ gulp.task('js', ['clean'], function() {
     .transform(reactify)
     .bundle()
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest('./src/'));
+    .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('watch', function() {

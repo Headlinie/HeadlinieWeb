@@ -9,7 +9,9 @@ var Modal = require('./modal.js');
 
 var AllPosts = React.createClass({
     getInitialState: function() {
-      return {posts: this.props.data}
+      return {
+          posts: this.props.data
+      }
     },
     reloadSource: function() {
       Track("Reloading source");

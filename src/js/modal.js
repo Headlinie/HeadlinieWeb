@@ -5,6 +5,8 @@ var Track = require('./track.js');
 //Ugly hack, fix this
 var cb;
 
+// Modal for showing the about popup, needs to be refactored into proper model
+// and abstract away the specific stuff for the about-page
 var Modal = React.createClass({
   getInitialState: function() {
     return {
@@ -44,7 +46,7 @@ var Modal = React.createClass({
             The source is <a href="http://www.reddit.com/r/worldnews" target="_blank">r/worldnews</a> on reddit.
           </p>
           <p>
-            It was created by <a href="http://victor.bjelkholm.com/?source=worldnews" target="_blank">Victor Bjelkholm</a> and the source will be available on Github as OSS as soon as possible.
+            It was created by <a href="http://victor.bjelkholm.com/?source=headlinie" target="_blank">Victor Bjelkholm</a> and the source will be available on Github as OSS as soon as possible.
           </p>
           <p>
             If you like the application, please rate it on <a href="https://marketplace.firefox.com/app/worldnews/" target="_blank">Firefox Marketplace</a>, spread
