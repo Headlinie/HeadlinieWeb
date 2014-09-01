@@ -2,6 +2,7 @@
 
 var React = require('react');
 
+// Button for going to the top of the page
 var GoToTopButton = React.createClass({
   render: function() {
     var styleObj = {

@@ -1,3 +1,4 @@
+//Simple helper for getting JSON content
 var getJSON = function(url, callback) {
   xhr = new XMLHttpRequest;
   xhr.onreadystatechange = function() {

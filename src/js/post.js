@@ -1,5 +1,7 @@
 /** @jsx React.DOM */
 
+// TODO split up this class into smaller classes
+
 var React = require('react');
 var Track = require('./track.js');
 var getJSON = require('./get_json.js');

@@ -1,6 +1,7 @@
 //var mixpanel = require('./mixpanel.js');
 // On line 9
 
+// Helper for either console.log'ing stuff or sending it to mixpanel
 var Track = null;
 if(location.href.indexOf('debug') !== -1) {
     Track = function() {

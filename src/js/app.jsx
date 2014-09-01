@@ -1,17 +1,8 @@
 /** @jsx React.DOM */
-
+// The URL for the API
 window.serverUrl = "http://api.headlinie.com/";
-var redditUrl = "http://www.reddit.com/r/worldnews.json";
 
-if(location.href.indexOf('local') !== -1) {
-  redditUrl = window.serverUrl + 'worldnews.json';
-}
-
-var possibleToInstallWebapp = false;
-if(window.navigator.mozApps !== undefined) {
-  possibleToInstallWebapp = true;
-}
-
+// Locking to portrait if possible
 function lockToPortait(){
   try {
     var lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
@@ -25,8 +16,10 @@ function lockToPortait(){
 }
 lockToPortait();
 
+//Where the manifest can be found
 var manifestUrl = 'http://victor.bjelkholm.com/worldnews/manifest.webapp';
 
+//Initialization for the application
 var startApplication = require('./load_page.js');
 
 startApplication();

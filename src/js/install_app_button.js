@@ -3,6 +3,15 @@
 var React = require('react');
 var Track = require('./track.js');
 
+
+// Variable to keep track of if device supports installation
+var possibleToInstallWebapp = false;
+if(window.navigator.mozApps !== undefined) {
+  possibleToInstallWebapp = true;
+}
+
+// Button for installing the application
+// TODO requires two clicks to popup installation in FxOS
 var InstallAppButton = React.createClass({
   handleInstallApp: function() {
     Track("Installing App");
@@ -17,11 +26,14 @@ var InstallAppButton = React.createClass({
     return false;
   },
   componentDidMount: function() {
+    // Only do stuff if device supports installation
     if(possibleToInstallWebapp) {
       Track("Device supports installation");
+      // If installed since before, don't show install button
       var request = window.navigator.mozApps.checkInstalled(manifestUrl);
       request.onsuccess = function(event) {
         if (!request.result) {
+          // Wait ten seconds then show the installation button
           setTimeout(function() {
             this.setState({visible: true});
             Track("Show installation button");

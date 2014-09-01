@@ -5,6 +5,7 @@ var Track = require('./track.js');
 var getJSON = require('./get_json.js');
 var AllPosts = require('./all_posts.js');
 
+// Helper method for loading stuff from the API
 function loadPage() {
   Track("Loading initial source", {
     version: "1.1.0"
