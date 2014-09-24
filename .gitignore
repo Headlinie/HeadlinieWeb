@@ -1,12 +1,8 @@
 bower_components/
-server/cache/
 npm-debug.log
-server/vendor/
-server/composer.lock
 node_modules/
 src/app.js
 build/
-server/coverage/
-server/tests/data/cacheFolder
+dist/bundle.js
 .DS_Store
 src/bundle.js

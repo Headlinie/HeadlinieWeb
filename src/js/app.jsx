@@ -1,5 +1,8 @@
 /** @jsx React.DOM */
 // The URL for the API
+// Development
+//window.serverUrl = "http://localhost:8001/";
+// Production
 window.serverUrl = "http://api.headlinie.com/";
 
 // Locking to portrait if possible
@@ -16,7 +19,10 @@ function lockToPortait(){
 }
 lockToPortait();
 
-//Where the manifest can be found
+// Where the manifest can be found
+// Development
+//var manifestUrl = '/manifest.webapp';
+// Production
 var manifestUrl = 'http://victor.bjelkholm.com/worldnews/manifest.webapp';
 
 //Initialization for the application
