@@ -2,8 +2,9 @@
 
 var React = require('react');
 var Track = require('./track.js');
-//Ugly hack, fix this
-var cb;
+
+var lightyear = require('lightyear').VMediator;
+
 
 // Modal for showing the about popup, needs to be refactored into proper model
 // and abstract away the specific stuff for the about-page
@@ -22,10 +23,9 @@ var Modal = React.createClass({
     this.setState({visible: false});
   },
   componentDidMount: function() {
-    //TODO This needs to be fixed asap, or browserify wont work
-    cb = function() {
+    lightyear.subscribe('about:show', function() {
       this.showPopup();
-    }.bind(this);
+    }.bind(this))
   },
   render: function() {
     return (

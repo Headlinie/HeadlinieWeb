@@ -1,7 +1,7 @@
 ﻿CACHE MANIFEST
 # v1 - 1.1.0 - 2013-08-12 - 01:09
 css/superhero.bootstrap.min.css
-build/app.min.js
+dist/bundle.js
 fonts/glyphicons-halflings-regular.woff
 imgs/icon-v2-60.png
 imgs/icon-v2-128.png

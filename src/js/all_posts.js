@@ -6,6 +6,10 @@ var Post = require('./post.js');
 var GoToTopButton = require('./go_to_top_button.js');
 var InstallAppButton = require('./install_app_button.js');
 var Modal = require('./modal.js');
+var moment = require('moment');
+
+var lightyear = require('lightyear').VMediator;
+
 
 var AllPosts = React.createClass({
     getInitialState: function() {
@@ -19,9 +23,14 @@ var AllPosts = React.createClass({
       loadPage();
     },
     showAbout: function() {
-      cb();
+        console.log('Clicked show about button');
+        lightyear.publish('about:show');
     },
     render: function() {
+      var iconStyle = {
+        top: "6px",
+        marginRight: "-12px"
+      };
       var posts = this.state.posts.map(function(data, i) {
         return (
           <div className="postItem">
@@ -32,9 +41,11 @@ var AllPosts = React.createClass({
       return (
         <div>
           <h1>
-            <span className="glyphicon glyphicon-globe"></span>
+            <span style={iconStyle} className="glyphicon glyphicon-globe"></span>
             &nbsp;
-            WorldNews
+            Headlinie
+            &nbsp;
+            -
             &nbsp;
             <span className="pull-right">
               <a href="#" className="btn btn-primary" onClick={this.showAbout}>
