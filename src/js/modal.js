@@ -40,13 +40,14 @@ var Modal = React.createClass({
             About
           </h2>
           <p>
-            WorldNews is a collection of news from all around the world.
+            Headlinie is a collection of news from all around the world.
           </p>
           <p>
             The source is <a href="http://www.reddit.com/r/worldnews" target="_blank">r/worldnews</a> on reddit.
           </p>
           <p>
-            It was created by <a href="http://victor.bjelkholm.com/?source=headlinie" target="_blank">Victor Bjelkholm</a> and the source will be available on Github as OSS as soon as possible.
+            It was created by <a href="http://victor.bjelkholm.com/?source=headlinie" target="_blank">Victor Bjelkholm</a> and the source is available on Github.
+            <a href="https://github.com/Headlinie" target="_blank">https://github.com/Headlinie</a>
           </p>
           <p>
             If you like the application, please rate it on <a href="https://marketplace.firefox.com/app/worldnews/" target="_blank">Firefox Marketplace</a>, spread
