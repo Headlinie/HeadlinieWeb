@@ -46,7 +46,7 @@ var Modal = React.createClass({
             The source is <a href="http://www.reddit.com/r/worldnews" target="_blank">r/worldnews</a> on reddit.
           </p>
           <p>
-            It was created by <a href="http://victor.bjelkholm.com/?source=headlinie" target="_blank">Victor Bjelkholm</a> and the source is available on Github.
+            It was created by <a href="http://www.twitter.com/VictorBjelkholm" target="_blank">Victor Bjelkholm</a> and the source is available on Github.
             <a href="https://github.com/Headlinie" target="_blank">https://github.com/Headlinie</a>
           </p>
           <p>

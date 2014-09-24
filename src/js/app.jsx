@@ -23,7 +23,7 @@ lockToPortait();
 // Development
 //var manifestUrl = '/manifest.webapp';
 // Production
-var manifestUrl = 'http://victor.bjelkholm.com/worldnews/manifest.webapp';
+var manifestUrl = 'http://headlinie.com/manifest.webapp';
 
 //Initialization for the application
 var startApplication = require('./load_page.js');

@@ -31,6 +31,7 @@ var Post = React.createClass({
     return false;
   },
   getArticle: function(articleLink, forceReload, callback) {
+    // TODO find a better way to do this than using window
     var articleLink = window.serverUrl + "sources/reddit/articles/" + encodeURIComponent(articleLink);
     if(forceReload) {
       articleLink = articleLink + "&force-reload=true";
