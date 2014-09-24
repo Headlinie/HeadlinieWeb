@@ -5,13 +5,20 @@
 var React = require('react');
 var Track = require('./track.js');
 var getJSON = require('./get_json.js');
+var moment = require('moment');
+var UnreadButton = require('./unread_button.js');
+var ReadService = require('./read_service.js');
 
 var Post = React.createClass({
   getInitialState: function() {
+    var haveBeenRead = ReadService.haveBeenRead(
+      this.props.data.link
+    );
     return {
       loading: false,
       error: false,
       open: false,
+      read: haveBeenRead,
       content: null
     };
   },
@@ -56,12 +63,17 @@ var Post = React.createClass({
       this.closeArticle();
     }
   },
+  setAsRead: function() {
+    this.setState({read: true});
+    ReadService.setAsRead(this.props.data.link);
+  },
   readArticle: function() {
     var post = this.props.data;
     Track("Reading article", {
       'link': post.link,
       'Title': post.title
     });
+    this.setAsRead();
     this.setState({loading: true, content: "Loading...", open: true});
     this.getArticle(post.link, false, function(data) {
       // this.setState({open: true});
@@ -73,8 +85,30 @@ var Post = React.createClass({
     }.bind(this));
     return false;
   },
+  componentDidMount: function() {
+      var idLink = this.props.data.title.substr(0, 50);
+      idLink = idLink.replace(new RegExp("'", "g"), "");
+      idLink = idLink.replace(new RegExp(",", "g"), "");
+      idLink = idLink.replace(new RegExp("\\\(", "g"), "");
+      idLink = idLink.replace(new RegExp("\\\)", "g"), "");
+      idLink = idLink.replace(new RegExp("\\\.", "g"), "");
+      idLink = idLink.replace(new RegExp("\\\/", "g"), "");
+      idLink = idLink.replace(new RegExp('"', "g"), "");
+      idLink = idLink.replace(new RegExp(" ", "g"), "_");
+      this.idLink = idLink;
+
+      console.log(location.hash.replace("#", "") === idLink);
+      if(location.hash.replace("#", "") === idLink) {
+        this.readArticle();
+        var el = document.getElementById(idLink);
+        el.scrollIntoView(true);
+      }
+
+  },
   render: function() {
       var post = this.props.data;
+
+
       var closeBtnStyle = {
         position: 'fixed',
         top: '5',
@@ -88,9 +122,12 @@ var Post = React.createClass({
       var shareLink = location.origin + "/#" + this.idLink;
 
       return (
-        <div>
+        <div id={this.idLink}>
           <p>
-            <h5 onClick={ this.toggleArticle }>{post.title}</h5>
+            <h5 onClick={ this.toggleArticle }>
+              <UnreadButton read={this.state.read}/>
+              {post.title}
+            </h5>
             <span className={this.state.open ? 'hidden' : ''}>
               <a className="btn btn-primary" href="" onClick={this.readArticle}>
                 <span className="glyphicon glyphicon-chevron-down"></span>
@@ -154,6 +191,12 @@ var Post = React.createClass({
                 &nbsp;
                 Comments
               </a>
+              &nbsp;
+              <a className="btn btn-danger" href={reportLink} target="_blank">
+                <span className="glyphicon glyphicon-warning-sign"></span>
+                &nbsp;
+                Report broken article
+              </a>
             </div>
             <div className={this.state.error ? 'alert alert-danger' : 'hidden'}>
               <h1>Error!</h1>
@@ -163,6 +206,11 @@ var Post = React.createClass({
               <span className={this.state.open ? '' : 'hidden'}>
                 <h2>{post.title}</h2>
                 <div dangerouslySetInnerHTML={{__html: this.state.content}} />
+                <div>
+                  <br/>
+                  <strong>Share this article with others by sharing the link below:</strong><br/>
+                  <a href={shareLink}>{shareLink}</a>
+                </div>
               </span>
             </div>
           </div>
