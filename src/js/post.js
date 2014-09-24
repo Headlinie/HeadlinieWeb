@@ -80,6 +80,13 @@ var Post = React.createClass({
         top: '5',
         left: '5'
       };
+
+      var reportLink = "https://victorbjelkholm.typeform.com/to/sd4jNB?title=xxxxx";
+      reportLink = reportLink.replace('xxxxx', post.title);
+      var timePosted = moment.unix(post.date_posted).fromNow(true);
+
+      var shareLink = location.origin + "/#" + this.idLink;
+
       return (
         <div>
           <p>
@@ -117,6 +124,8 @@ var Post = React.createClass({
                 &nbsp;
                 {post.category}
               </span>
+              &nbsp;
+              {timePosted} ago
             </span>
             <div className="visible-xs-block meta-small">
               <span className="label label-primary">

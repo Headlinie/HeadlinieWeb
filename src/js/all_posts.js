@@ -13,8 +13,10 @@ var lightyear = require('lightyear').VMediator;
 
 var AllPosts = React.createClass({
     getInitialState: function() {
+      var dateToShow = moment().format("MMM Do YYYY")
       return {
-          posts: this.props.data
+          posts: this.props.data,
+          date: dateToShow
       }
     },
     reloadSource: function() {
@@ -47,6 +49,7 @@ var AllPosts = React.createClass({
             &nbsp;
             -
             &nbsp;
+            {this.state.date}
             <span className="pull-right">
               <a href="#" className="btn btn-primary" onClick={this.showAbout}>
                 <span className="glyphicon glyphicon-info-sign"></span>
