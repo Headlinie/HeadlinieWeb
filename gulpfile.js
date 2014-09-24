@@ -31,6 +31,8 @@ gulp.task('watch', function() {
 
 gulp.task('default', ['watch', 'js']);
 
+gulp.task('build', ['js']);
+
 // TODO add task for building for production usage
 // gulp.task('default', ['watch', 'js']);
 
