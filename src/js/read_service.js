@@ -4,7 +4,9 @@ var readArticles = []
 
 var readService = {
     getLocalstorage: function() {
-        readArticles = JSON.parse(localStorage.getItem('readArticles'))
+        if(localStorage.getItem('readArticles')) {
+            readArticles = JSON.parse(localStorage.getItem('readArticles'))
+        }
     },
     saveLocalstorage: function() {
         localStorage.setItem(
