@@ -28,31 +28,48 @@ var Modal = React.createClass({
     }.bind(this))
   },
   render: function() {
+    var headerStyle = {
+      margin: 0,
+      padding: 0,
+      display: 'inline',
+      float: 'left',
+      marginBottom: '10px'
+    };
+
+    var iconStyle = {
+      top: "4px",
+      left: "6px"
+    };
+
     return (
       <div className={this.state.visible ? 'popup-show' : 'popup-hide'}>
         <div className="popup-body">
           <div className="popup-close" onClick={this.hidePopup}>
             <span className="glyphicon glyphicon-remove"></span>
           </div>
-          <h2>
-            <span className="glyphicon glyphicon-info-sign"></span>
+          <h2 style={headerStyle}>
+            <span style={iconStyle} className="glyphicon glyphicon-info-sign"></span>
             &nbsp;
             About
           </h2>
-          <p>
-            Headlinie is a collection of news from all around the world.
-          </p>
-          <p>
-            The source is <a href="http://www.reddit.com/r/worldnews" target="_blank">r/worldnews</a> on reddit.
-          </p>
-          <p>
-            It was created by <a href="http://www.twitter.com/VictorBjelkholm" target="_blank">Victor Bjelkholm</a> and the source is available on Github.
-            <a href="https://github.com/Headlinie" target="_blank">https://github.com/Headlinie</a>
-          </p>
-          <p>
-            If you like the application, please rate it on <a href="https://marketplace.firefox.com/app/worldnews/" target="_blank">Firefox Marketplace</a>, spread
-            it or just keep using it like before.
-          </p>
+          <div className="clear"></div>
+          <div className="popup-body-scroll">
+            <p>
+              Headlinie is a collection of news from all around the world.
+            </p>
+            <p>
+              The source is <a href="http://www.reddit.com/r/worldnews" target="_blank">r/worldnews</a> on reddit.
+            </p>
+            <p>
+              It was created by <a href="http://www.twitter.com/VictorBjelkholm" target="_blank">Victor Bjelkholm</a> and the source is available on Github
+              &nbsp;
+              <a href="https://github.com/Headlinie" target="_blank">https://github.com/Headlinie</a>
+            </p>
+            <p>
+              If you like the application, please rate it on <a href="https://marketplace.firefox.com/app/worldnews/" target="_blank">Firefox Marketplace</a>, spread
+              it or just keep using it like before.
+            </p>
+          </div>
         </div>
       </div>
     )

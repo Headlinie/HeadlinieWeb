@@ -46,10 +46,16 @@ var AllPosts = React.createClass({
             <span style={iconStyle} className="glyphicon glyphicon-globe"></span>
             &nbsp;
             Headlinie
+            <span className="hidden-xs">
             &nbsp;
             -
             &nbsp;
             {this.state.date}
+            &nbsp;
+            -
+            &nbsp;
+            {this.state.source}
+            </span>
             <span className="pull-right">
               <a href="#" className="btn btn-primary" onClick={this.showAbout}>
                 <span className="glyphicon glyphicon-info-sign"></span>

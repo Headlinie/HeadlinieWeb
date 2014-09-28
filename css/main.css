@@ -77,12 +77,13 @@ body {
 
 .popup-body {
 	background-color: rgba(0,0,0,0.8);
-	padding: 1em;
+	padding: 0.5em;
 	position: fixed;
-	width: 90%;
-	margin-left: 3%;
-	top: 3%;
+	width: 99%;
+	height: 99%;
+	overflow-y: visible;
 }
+
 
 .popup-hide .popup-body {
 	display: none;
@@ -96,4 +97,8 @@ body {
 .popup-close:hover {
 	cursor: pointer;
 	color: #FFF;
+}
+
+.clear {
+	clear: both;
 }

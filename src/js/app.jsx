@@ -21,11 +21,13 @@ lockToPortait();
 
 // Where the manifest can be found
 // Development
-//var manifestUrl = '/manifest.webapp';
+window.manifestUrl = 'http://localhost:8000/manifest.webapp';
 // Production
-var manifestUrl = 'http://headlinie.com/manifest.webapp';
+//window.manifestUrl = 'http://headlinie.com/manifest.webapp';
 
 //Initialization for the application
 var startApplication = require('./load_page.js');
 
-startApplication();
+console.log(startApplication)
+
+startApplication('WorldNews');

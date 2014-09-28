@@ -15,7 +15,7 @@ if(window.navigator.mozApps !== undefined) {
 var InstallAppButton = React.createClass({
   handleInstallApp: function() {
     Track("Installing App");
-    var request = window.navigator.mozApps.install(manifestUrl);
+    var request = window.navigator.mozApps.install(window.manifestUrl);
     request.onsuccess = function () {
       Track("App installed!")
     };
@@ -30,18 +30,24 @@ var InstallAppButton = React.createClass({
     if(possibleToInstallWebapp) {
       Track("Device supports installation");
       // If installed since before, don't show install button
-      var request = window.navigator.mozApps.checkInstalled(manifestUrl);
-      request.onsuccess = function(event) {
-        if (!request.result) {
-          // Wait ten seconds then show the installation button
-          setTimeout(function() {
-            this.setState({visible: true});
-            Track("Show installation button");
-          }.bind(this), 10000);
-        } else {
-          Track("App already installed");
-        }
-      }.bind(this);
+      // This throws out of memory exception if not on the same domain
+      // https://bugzilla.mozilla.org/show_bug.cgi?id=922187
+      try {
+        var request = window.navigator.mozApps.checkInstalled(window.manifestUrl);
+        request.onsuccess = function(event) {
+          if (!request.result) {
+            // Wait ten seconds then show the installation button
+            setTimeout(function() {
+              this.setState({visible: true});
+              Track("Show installation button");
+            }.bind(this), 10000);
+          } else {
+            Track("App already installed");
+          }
+        }.bind(this);
+      } catch (err) {
+        console.log("Error with domains")
+      }
     }
   },
   getInitialState: function() {
