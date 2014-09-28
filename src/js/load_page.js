@@ -4,21 +4,35 @@ var React = require('react');
 var Track = require('./track.js');
 var getJSON = require('./get_json.js');
 var AllPosts = require('./all_posts.js');
+var _ = require('underscore');
+var sources = require('./sources.js');
+
+var lightyear = require('lightyear').VMediator;
 
 // Helper method for loading stuff from the API
-function loadPage() {
+var loadPage = function(source) {
   Track("Loading initial source", {
-    version: "1.1.0"
+    version: "1.2.0"
   });
-  getJSON(window.serverUrl + "sources/reddit/articles", function(data) {
+
+  var shortname = _.findWhere(sources, {name: source}).shortname;
+
+  getJSON(window.serverUrl + "sources/" + shortname + "/articles", function(data) {
       var allPosts = [];
-      console.log(data);
       var posts = data.articles;
       posts.forEach(function(post) {
           allPosts.push(post);
       })
-      React.renderComponent(<AllPosts data={allPosts}/>, document.getElementById('mountArea'));
+      console.log(allPosts)
+      React.renderComponent(<AllPosts data={allPosts} source={source}/>, document.getElementById('mountArea'));
   });
 }
+
+lightyear.subscribe('source:load', function(sourceName) {
+  console.log('received event!')
+  loadPage(sourceName);
+});
+
+window.lightyear = lightyear;
 
 module.exports = loadPage;

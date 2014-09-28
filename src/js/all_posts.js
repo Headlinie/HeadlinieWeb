@@ -7,7 +7,9 @@ var GoToTopButton = require('./go_to_top_button.js');
 var InstallAppButton = require('./install_app_button.js');
 var Modal = require('./modal.js');
 var moment = require('moment');
+var _ = require('underscore');
 
+var sources = require('./sources.js');
 var lightyear = require('lightyear').VMediator;
 
 
@@ -16,19 +18,35 @@ var AllPosts = React.createClass({
       var dateToShow = moment().format("MMM Do YYYY")
       return {
           posts: this.props.data,
-          date: dateToShow
+          date: dateToShow,
+          source: this.props.source
       }
     },
     reloadSource: function() {
       Track("Reloading source");
       document.getElementById('mountArea').innerHTML = "<h1>Loading...</h1>";
-      loadPage();
+      loadPage('reddit');
+    },
+    toggleSource: function() {
+      Track("Toggling source");
+      document.getElementById('mountArea').innerHTML = "<h1>Loading...</h1>";
+      var newSource;
+      if(this.state.source === 'WorldNews') {
+          newSource = _.findWhere(sources, {shortname: 'hackernews'});
+          this.setState({source: newSource.name})
+      }
+      if(this.state.source === 'HackerNews') {
+          newSource = _.findWhere(sources, {shortname: 'reddit'});
+          this.setState({source: newSource.name})
+      }
+      lightyear.publish('source:load', newSource.name)
     },
     showAbout: function() {
         console.log('Clicked show about button');
         lightyear.publish('about:show');
     },
     render: function() {
+        console.log('All posts, render')
       var iconStyle = {
         top: "6px",
         marginRight: "-12px"
@@ -65,11 +83,11 @@ var AllPosts = React.createClass({
                 </span>
               </a>
               &nbsp;
-              <a href="#" className="btn btn-default" onClick={this.reloadSource}>
+              <a href="#" className="btn btn-default" onClick={this.toggleSource}>
                 <span className="glyphicon glyphicon-refresh"></span>
                 <span className="hidden-xs">
                   &nbsp;
-                  Reload main-source
+                  Toggle Source
                 </span>
               </a>
             </span>
