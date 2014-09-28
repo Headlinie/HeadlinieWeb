@@ -21,9 +21,9 @@ lockToPortait();
 
 // Where the manifest can be found
 // Development
-window.manifestUrl = 'http://localhost:8000/manifest.webapp';
+//window.manifestUrl = 'http://localhost:8000/manifest.webapp';
 // Production
-//window.manifestUrl = 'http://headlinie.com/manifest.webapp';
+window.manifestUrl = 'http://headlinie.com/manifest.webapp';
 
 //Initialization for the application
 var startApplication = require('./load_page.js');
