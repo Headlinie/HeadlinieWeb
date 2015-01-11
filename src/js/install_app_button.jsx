@@ -17,7 +17,7 @@ var InstallAppButton = React.createClass({
     Track("Installing App");
     var request = window.navigator.mozApps.install(window.manifestUrl);
     request.onsuccess = function () {
-      Track("App installed!")
+      Track("App installed!");
     };
     request.onerror = function () {
       alert("Something went wrong. Please report this issue");
@@ -46,14 +46,14 @@ var InstallAppButton = React.createClass({
           }
         }.bind(this);
       } catch (err) {
-        console.log("Error with domains")
+        console.log("Error with domains");
       }
     }
   },
   getInitialState: function() {
     return {
       visible: false
-    }
+    };
   },
   render: function() {
     var styleObj = {
@@ -74,8 +74,8 @@ var InstallAppButton = React.createClass({
           Install
         </a>
       </div>
-    )
+    );
   }
-})
+});
 
 module.exports = InstallAppButton;

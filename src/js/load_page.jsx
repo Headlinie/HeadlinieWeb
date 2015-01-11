@@ -3,7 +3,7 @@
 var React = require('react');
 var Track = require('./track.js');
 var getJSON = require('./get_json.js');
-var AllPosts = require('./all_posts.js');
+var AllPosts = require('./all_posts.jsx');
 var _ = require('underscore');
 var sources = require('./sources.js');
 
@@ -22,14 +22,12 @@ var loadPage = function(source) {
       var posts = data.articles;
       posts.forEach(function(post) {
           allPosts.push(post);
-      })
-      console.log(allPosts)
+      });
       React.renderComponent(<AllPosts data={allPosts} source={source}/>, document.getElementById('mountArea'));
   });
-}
+};
 
 lightyear.subscribe('source:load', function(sourceName) {
-  console.log('received event!')
   loadPage(sourceName);
 });
 

@@ -23,7 +23,7 @@ var GoToTopButton = React.createClass({
           Go to top
         </a>
       </div>
-    )
+    );
   }
 });
 

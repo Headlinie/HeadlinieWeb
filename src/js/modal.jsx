@@ -12,7 +12,7 @@ var Modal = React.createClass({
   getInitialState: function() {
     return {
       visible: false
-    }
+    };
   },
   showPopup: function() {
     Track("Showing the popup");
@@ -25,7 +25,7 @@ var Modal = React.createClass({
   componentDidMount: function() {
     lightyear.subscribe('about:show', function() {
       this.showPopup();
-    }.bind(this))
+    }.bind(this));
   },
   render: function() {
     var headerStyle = {
@@ -72,8 +72,8 @@ var Modal = React.createClass({
           </div>
         </div>
       </div>
-    )
+    );
   }
-})
+});
 
 module.exports = Modal;

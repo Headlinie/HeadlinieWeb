@@ -6,7 +6,7 @@ var Track = null;
 if(location.href.indexOf('debug') !== -1) {
     Track = function() {
         console.log(arguments);
-    }
+    };
 } else {
     var mixpanel = require('./mixpanel.js');
     Track = function(name, object) {
@@ -15,7 +15,7 @@ if(location.href.indexOf('debug') !== -1) {
         } else {
             mixpanel.track(name);
         }
-    }
+    };
 }
 
 module.exports = Track;

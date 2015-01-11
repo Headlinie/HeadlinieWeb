@@ -1,11 +1,11 @@
 var _ = require("underscore");
 
-var readArticles = []
+var readArticles = [];
 
 var readService = {
     getLocalstorage: function() {
         if(localStorage.getItem('readArticles')) {
-            readArticles = JSON.parse(localStorage.getItem('readArticles'))
+            readArticles = JSON.parse(localStorage.getItem('readArticles'));
         }
     },
     saveLocalstorage: function() {
@@ -16,9 +16,9 @@ var readService = {
     },
     haveBeenRead: function(link) {
         if(_.indexOf(readArticles, link) !== -1) {
-            return true
+            return true;
         } else {
-            return false
+            return false;
         }
     },
     setAsRead: function(link) {
@@ -27,7 +27,7 @@ var readService = {
             readService.saveLocalstorage();
         }
     }
-}
+};
 
 readService.getLocalstorage();
 

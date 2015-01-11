@@ -2,10 +2,10 @@
 
 var React = require('react');
 var Track = require('./track.js');
-var Post = require('./post.js');
-var GoToTopButton = require('./go_to_top_button.js');
-var InstallAppButton = require('./install_app_button.js');
-var Modal = require('./modal.js');
+var Post = require('./post.jsx');
+var GoToTopButton = require('./go_to_top_button.jsx');
+var InstallAppButton = require('./install_app_button.jsx');
+var Modal = require('./modal.jsx');
 var moment = require('moment');
 var _ = require('underscore');
 
@@ -15,12 +15,12 @@ var lightyear = require('lightyear').VMediator;
 
 var AllPosts = React.createClass({
     getInitialState: function() {
-      var dateToShow = moment().format("MMM Do YYYY")
+      var dateToShow = moment().format("MMM Do YYYY");
       return {
           posts: this.props.data,
           date: dateToShow,
           source: this.props.source
-      }
+      };
     },
     reloadSource: function() {
       Track("Reloading source");
@@ -33,30 +33,28 @@ var AllPosts = React.createClass({
       var newSource;
       if(this.state.source === 'WorldNews') {
           newSource = _.findWhere(sources, {shortname: 'hackernews'});
-          this.setState({source: newSource.name})
+          this.setState({source: newSource.name});
       }
       if(this.state.source === 'HackerNews') {
           newSource = _.findWhere(sources, {shortname: 'reddit'});
-          this.setState({source: newSource.name})
+          this.setState({source: newSource.name});
       }
-      lightyear.publish('source:load', newSource.name)
+      lightyear.publish('source:load', newSource.name);
     },
     showAbout: function() {
-        console.log('Clicked show about button');
         lightyear.publish('about:show');
     },
     render: function() {
-        console.log('All posts, render')
       var iconStyle = {
         top: "6px",
         marginRight: "-12px"
       };
       var posts = this.state.posts.map(function(data, i) {
         return (
-          <div className="postItem">
+          <div className="postItem" key={i}>
             <Post data={data}/>
           </div>
-        )
+        );
       });
       return (
         <div>
@@ -82,6 +80,8 @@ var AllPosts = React.createClass({
                   About
                 </span>
               </a>
+
+							{/*
               &nbsp;
               <a href="#" className="btn btn-default" onClick={this.toggleSource}>
                 <span className="glyphicon glyphicon-refresh"></span>
@@ -90,6 +90,7 @@ var AllPosts = React.createClass({
                   Toggle Source
                 </span>
               </a>
+							*/}
             </span>
           </h1>
           {posts}

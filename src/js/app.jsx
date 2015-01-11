@@ -36,6 +36,6 @@ lockToPortait();
 window.manifestUrl = 'http://'+domain+'.'+tld+'/manifest.webapp';
 
 //Initialization for the application
-var startApplication = require('./load_page.js');
+var startApplication = require('./load_page.jsx');
 
 startApplication('WorldNews');

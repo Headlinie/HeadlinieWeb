@@ -6,10 +6,10 @@ var UnreadButton = React.createClass({
     getInitialState: function() {
         return {
             read: this.props.read
-        }
+        };
     },
     componentWillReceiveProps: function() {
-        this.setState({read: this.props.read})
+        this.setState({read: this.props.read});
     },
     render: function() {
         
@@ -32,7 +32,7 @@ var UnreadButton = React.createClass({
                 <span className="label label-success" style={styleObj}>
                     New!
                 </span>
-        )
+        );
     }
 });
 

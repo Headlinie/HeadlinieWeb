@@ -6,7 +6,7 @@ var React = require('react');
 var Track = require('./track.js');
 var getJSON = require('./get_json.js');
 var moment = require('moment');
-var UnreadButton = require('./unread_button.js');
+var UnreadButton = require('./unread_button.jsx');
 var ReadService = require('./read_service.js');
 
 var Post = React.createClass({
@@ -32,7 +32,7 @@ var Post = React.createClass({
   },
   getArticle: function(articleLink, forceReload, callback) {
     // TODO find a better way to do this than using window
-    var articleLink = window.serverUrl + "sources/reddit/articles/" + encodeURIComponent(articleLink);
+    articleLink = window.serverUrl + "sources/reddit/articles/" + encodeURIComponent(articleLink);
     if(forceReload) {
       articleLink = articleLink + "&force-reload=true";
     }
@@ -98,7 +98,6 @@ var Post = React.createClass({
       idLink = idLink.replace(new RegExp(" ", "g"), "_");
       this.idLink = idLink;
 
-      console.log(location.hash.replace("#", "") === idLink);
       if(location.hash.replace("#", "") === idLink) {
         this.readArticle();
         var el = document.getElementById(idLink);
@@ -216,7 +215,7 @@ var Post = React.createClass({
             </div>
           </div>
         </div>
-      )
+      );
   }
 });
 
